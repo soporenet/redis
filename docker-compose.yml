@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+ # Redis (used by Authelia for session storage)
+  redis:
+    image: docker.io/redis:alpine
+    container_name: redis
+    restart: always
+    expose:
+      - 6379
+    networks:
+      - web-net
+    volumes:
+      - redis-data:/data
+volumes:
+  redis-data:
+
+networks:
+  web-net:
+    external:
+      name: mgmt-net
